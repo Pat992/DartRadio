@@ -5,7 +5,7 @@ class PreferenceHelper {
   bool _isDarkTheme;
   List<String> _favorites;
 
-  _initPreferences() async {
+  initPreferences() async {
     _prefs = await SharedPreferences.getInstance();
     _isDarkTheme = _prefs.getBool('isDarkTheme');
     _favorites = _prefs.getStringList('favorites');
