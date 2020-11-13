@@ -23,7 +23,8 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         routes: {
-          RadioMobileScreen.ROUTE_NAME: (context) => RadioMobileScreen()
+          //RadioMobileScreen.ROUTE_NAME: (context) => RadioMobileScreen(),
+          PlayScreen.ROUTE_NAME: (context) => PlayScreen()
         },
       ),
     );

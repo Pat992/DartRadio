@@ -3,7 +3,7 @@ import 'package:dart_radio/widgets/time_progress.dart';
 import 'package:flutter/material.dart';
 
 class PlayScreen extends StatelessWidget {
-
+  static const ROUTE_NAME = '/';
   //This is for test purposes
   DateTime TEST_START = DateTime.now().subtract(new Duration(seconds: 52));
   DateTime TEST_END = DateTime.now().add(new Duration(seconds: 111));
@@ -16,8 +16,11 @@ class PlayScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: new TimeProgress(songTime: this.songTime),
+    return Scaffold(
+      body: Container(
+       child: new TimeProgress(songTime: this.songTime),
+      )
     );
+
   }
 }

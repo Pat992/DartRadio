@@ -1,5 +1,6 @@
 import 'package:dart_radio/helper/song_time_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TimeProgress extends StatefulWidget {
 
@@ -21,10 +22,10 @@ class _TimeProgressState extends State<TimeProgress> {
       children: <Widget>[
         Text('${widget.songTime.minutesLeft()} : ${widget.songTime.secondsLeft()}',
           style: TextStyle(
-            fontSize: 22
+            fontSize: 22,
           ),
         ),
-        Text('${widget.songTime.timeLeft()}'),
+        Text('${ widget.songTime.timeLeft() }'),
         Text('${widget.songTime.duration}')
       ],
     );

@@ -18,8 +18,7 @@ class SongTimeHelper {
     return endTime.difference(startTime);
   }
 
-  Duration timeLeft(){
-    print(_enddate.difference(new DateTime.now()));
+  Duration timeLeft(){;
     return _enddate.difference(new DateTime.now());
   }
 
