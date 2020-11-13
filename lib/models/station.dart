@@ -3,7 +3,7 @@ class Station {
   String _displayName;
   String _streamUrl;
   String _description;
-  List<String> _genres;
+  List<dynamic> _genres;
   String _image;
   String _songUrl;
 

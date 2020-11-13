@@ -1,5 +1,6 @@
-import 'package:dart_radio/widgets/station_list_item.dart';
+import 'package:dart_radio/providers/stations_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class StationList extends StatefulWidget {
   @override
@@ -8,10 +9,21 @@ class StationList extends StatefulWidget {
 
 class _StationListState extends State<StationList> {
   @override
+  void initState() async {
+    await Provider.of<StationsProvider>(context, listen: false)
+        .getStationsFromApi();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    //List<Station> stations = [];
+    final stationsProvider = Provider.of<StationsProvider>(context);
+    final stations = stationsProvider.stations;
+
     return ListView.builder(
-      itemCount: 1,
-      itemBuilder: (context, index) => StationListItem(),
+      itemCount: stations.length,
+      itemBuilder: (context, index) => Text(stations[index].displayName),
     );
   }
 }
