@@ -21,7 +21,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: RadioMobileScreen(),
+        routes: {
+          RadioMobileScreen.ROUTE_NAME: (context) => RadioMobileScreen()
+        },
       ),
     );
   }
