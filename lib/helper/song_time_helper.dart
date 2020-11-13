@@ -12,12 +12,12 @@ class SongTimeHelper {
     _songDuration = _calculateDuration(this._startdate, this._enddate);
   }
 
-  get duration(){
+  get duration{
     return _songDuration;
   }
 
   Duration _calculateDuration(startTime, endTime){
-    Duration duration = startTime.difference(endTime);
+    return startTime.difference(endTime);
   }
 
   Duration timeLeft(){

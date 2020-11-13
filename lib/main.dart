@@ -1,3 +1,4 @@
+import 'package:dart_radio/screens/play_screen.dart';
 import 'package:dart_radio/screens/radio_mobile_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: RadioMobileScreen(),
+      home: PlayScreen(),
     );
   }
 }
