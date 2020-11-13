@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class SongTimeHelper {
 
   DateTime _startdate;
@@ -21,6 +19,7 @@ class SongTimeHelper {
   }
 
   Duration timeLeft(){
+  print (DateTime.now().difference(_enddate));
     return DateTime.now().difference(_enddate);
   }
 
