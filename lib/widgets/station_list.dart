@@ -1,3 +1,5 @@
+import 'package:dart_radio/helper/player_helper.dart';
+import 'package:dart_radio/models/station.dart';
 import 'package:dart_radio/providers/stations_provider.dart';
 import 'package:dart_radio/widgets/station_list_item.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,8 @@ class StationList extends StatefulWidget {
 
 class _StationListState extends State<StationList> {
   bool _isLoading = false;
+  PlayerHelper _player = PlayerHelper();
+
   @override
   void initState() {
     callApi();
@@ -29,14 +33,18 @@ class _StationListState extends State<StationList> {
     });
   }
 
+  void startPlay(String songUrl) {
+    _player.play(songUrl);
+  }
+
   @override
   Widget build(BuildContext context) {
     //List<Station> stations = [];
     final stationsProvider = Provider.of<StationsProvider>(context);
-    final stations = stationsProvider.stations;
+    final List<Station> stations = stationsProvider.stations;
 
     return _isLoading
-        ? CircularProgressIndicator()
+        ? Center(child: CircularProgressIndicator())
         : ListView.builder(
             itemCount: stations.length,
             itemBuilder: (context, index) => StationListItem(
@@ -44,6 +52,8 @@ class _StationListState extends State<StationList> {
               title: stations[index].displayName,
               description: stations[index].description,
               imageUrl: stations[index].image,
+              streamUrl: stations[index].streamUrl,
+              startPlaying: startPlay,
             ),
           );
   }

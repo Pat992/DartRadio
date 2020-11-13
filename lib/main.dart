@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => StationsProvider())
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'DartRadio',
         theme: ThemeData(
           primarySwatch: Colors.blue,
