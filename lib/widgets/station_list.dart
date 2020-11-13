@@ -26,7 +26,7 @@ class _StationListState extends State<StationList> {
     });
 
     await Provider.of<StationsProvider>(context, listen: false)
-        .getStationsFromApi();
+        .getApiInformation();
 
     setState(() {
       _isLoading = false;

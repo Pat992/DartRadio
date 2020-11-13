@@ -20,6 +20,11 @@ class StationsProvider with ChangeNotifier {
     _genres = [];
   }
 
+  Future<void> getApiInformation() async {
+    await getStationsFromApi();
+    await getGenresFromApi();
+  }
+
   Future<void> getStationsFromApi() async {
     final String url = '$_baseUrl$_stationUrl';
 
@@ -39,7 +44,24 @@ class StationsProvider with ChangeNotifier {
     }
   }
 
-  Future<void> getGenresFromApi() async {}
+  Future<void> getGenresFromApi() async {
+    final String url = '$_baseUrl$_genreUrl';
+
+    try {
+      final response = await http.get(url);
+      final extractedJson = json.decode(response.body) as List<dynamic>;
+      if (extractedJson == null) {
+        throw Error();
+      }
+
+      extractedJson.forEach((element) {
+        final genre = Genre.fromJson(element);
+        _genres.add(genre);
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 
   get stations {
     return _stations;
