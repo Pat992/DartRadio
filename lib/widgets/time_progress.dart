@@ -19,14 +19,14 @@ class _TimeProgressState extends State<TimeProgress> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Text('${widget.songTime.minutesLeft()} : ${widget.songTime.minutesLeft()}',
+        Text('${widget.songTime.minutesLeft()} : ${widget.songTime.secondsLeft()}',
           style: TextStyle(
             fontSize: 22
           ),
         ),
-        Text('${widget.songTime.timeLeft()}')
+        Text('${widget.songTime.timeLeft()}'),
+        Text('${widget.songTime.duration}')
       ],
-
     );
   }
 }

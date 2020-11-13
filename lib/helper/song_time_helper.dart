@@ -15,12 +15,12 @@ class SongTimeHelper {
   }
 
   Duration _calculateDuration(startTime, endTime){
-    return startTime.difference(endTime);
+    return endTime.difference(startTime);
   }
 
   Duration timeLeft(){
-  print (DateTime.now().difference(_enddate));
-    return DateTime.now().difference(_enddate);
+    print(_enddate.difference(new DateTime.now()));
+    return _enddate.difference(new DateTime.now());
   }
 
   int minutesLeft(){
