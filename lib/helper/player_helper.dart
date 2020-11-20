@@ -7,8 +7,8 @@ class PlayerHelper {
     _player = AudioPlayer();
   }
 
-  play(String songUrl) {
-    _player.play(songUrl);
+  Future<void> play(String songUrl) async {
+    await _player.play(songUrl);
   }
 
   stop() {
