@@ -12,6 +12,7 @@ class StationList extends StatefulWidget {
 
 class _StationListState extends State<StationList> {
   PlayerHelper _player = PlayerHelper();
+  bool _isPlaying = false;
 
   bool _isLoading = false;
   @override
@@ -33,8 +34,18 @@ class _StationListState extends State<StationList> {
     });
   }
 
-  void startPlay(String songUrl) {
-    _player.play(songUrl);
+  Future<void> _startPlay(String songUrl) async {
+    await _player.play(songUrl);
+    setState(() {
+      _isPlaying = true;
+    });
+  }
+
+  void _stopPlay() {
+    setState(() {
+      _player.stop();
+      _isPlaying = false;
+    });
   }
 
   @override
@@ -45,16 +56,32 @@ class _StationListState extends State<StationList> {
 
     return _isLoading
         ? Center(child: CircularProgressIndicator())
-        : ListView.builder(
-            itemCount: stations.length,
-            itemBuilder: (context, index) => StationListItem(
-              key: ValueKey(stations[index].name),
-              title: stations[index].displayName,
-              description: stations[index].description,
-              imageUrl: stations[index].image,
-              streamUrl: stations[index].streamUrl,
-              startPlaying: startPlay,
-            ),
+        : Column(
+            children: <Widget>[
+              Expanded(
+                child: ListView.builder(
+                  itemCount: stations.length,
+                  itemBuilder: (context, index) => StationListItem(
+                    key: ValueKey(stations[index].name),
+                    title: stations[index].displayName,
+                    description: stations[index].description,
+                    imageUrl: stations[index].image,
+                    streamUrl: stations[index].streamUrl,
+                    startPlaying: _startPlay,
+                  ),
+                ),
+              ),
+              AnimatedContainer(
+                color: Theme.of(context).accentColor,
+                height: _isPlaying ? 70 : 0,
+                duration: Duration(milliseconds: 200),
+                width: MediaQuery.of(context).size.width,
+                child: IconButton(
+                  icon: Icon(Icons.stop_circle_outlined),
+                  onPressed: _stopPlay,
+                ),
+              ),
+            ],
           );
   }
 }
