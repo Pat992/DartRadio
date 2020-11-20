@@ -47,7 +47,19 @@ class SongTimeHelper {
   }
 
   String durationFormatted(){
-    return duration.toString();
+    return _format(duration);
+  }
+
+  String timeLeftFormatted(){
+    return _format(timeLeft());
+  }
+
+  String timeToFinishFormatted(){
+   return _format(timeToFinish());
+  }
+
+  String _format (Duration d){
+    return d.toString().split('.').first.padLeft(8, "0");
   }
 
 

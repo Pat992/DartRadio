@@ -26,13 +26,10 @@ class _TimeProgressState extends State<TimeProgress> {
   @override
   void initState() {
     super.initState();
-    seconds = widget.songTime.secondsToFinish();
-    minutes = widget.songTime.minutesToFinish();
+
     percentDone = widget.songTime.percentPlayed();
     Timer.periodic (Duration(milliseconds: 300), (Timer t) {
       setState( () {
-        seconds = widget.songTime.secondsToFinish();
-        minutes = widget.songTime.minutesToFinish();
         percentDone = widget.songTime.percentPlayed();
       });
     });
@@ -45,13 +42,13 @@ class _TimeProgressState extends State<TimeProgress> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Text('$minutes : $seconds',
+          Text('${widget.songTime.timeToFinishFormatted()}',
             style: TextStyle(
               fontSize: 14,
             ),
           ),
           SizedBox(
-            width: 100,
+            width: MediaQuery.of(context).size.width/100*80,
             child: FAProgressBar(
               currentValue: percentDone,
               animatedDuration:	const Duration(milliseconds: 300),
@@ -59,7 +56,7 @@ class _TimeProgressState extends State<TimeProgress> {
               size: 10
             ),
           ),
-          Text('${widget.songTime.duration.toString()}',
+          Text('${widget.songTime.durationFormatted()}',
             style: TextStyle(
               fontSize: 14,
             ),
