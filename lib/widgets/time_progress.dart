@@ -28,7 +28,7 @@ class _TimeProgressState extends State<TimeProgress> {
         Text('${ widget.songTime.timeLeft() }'),
         Text('${ widget.songTime.duration }'),
         FAProgressBar(
-          currentValue: 30,
+          currentValue: widget.songTime.percentPlayed() ,
         )
       ],
     );

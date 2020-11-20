@@ -30,4 +30,8 @@ class SongTimeHelper {
     return timeLeft().inSeconds - (timeLeft().inMinutes * 60);
   }
 
+  int percentPlayed(){
+    return (timeLeft().inSeconds * 100 / duration.inSeconds).round();
+  }
+
 }
