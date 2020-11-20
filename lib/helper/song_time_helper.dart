@@ -18,9 +18,20 @@ class SongTimeHelper {
     return endTime.difference(startTime);
   }
 
+  Duration timeToFinish(){
+    return new DateTime.now().difference(_startdate);
+  }
+
   Duration timeLeft(){
-    print(_enddate.difference(new DateTime.now()));
     return _enddate.difference(new DateTime.now());
+  }
+
+  int minutesToFinish(){
+    return timeToFinish().inMinutes;
+  }
+
+  int secondsToFinish(){
+    return timeToFinish().inSeconds - (timeToFinish().inMinutes * 60);
   }
 
   int minutesLeft(){
@@ -30,5 +41,27 @@ class SongTimeHelper {
   int secondsLeft(){
     return timeLeft().inSeconds - (timeLeft().inMinutes * 60);
   }
+
+  int percentPlayed(){
+    return (timeToFinish().inSeconds * 100 / duration.inSeconds).round();
+  }
+
+  String durationFormatted(){
+    return _format(duration);
+  }
+
+  String timeLeftFormatted(){
+    return _format(timeLeft());
+  }
+
+  String timeToFinishFormatted(){
+   return _format(timeToFinish());
+  }
+
+  String _format (Duration d){
+    return d.toString().split('.').first.padLeft(8, "0");
+  }
+
+
 
 }
