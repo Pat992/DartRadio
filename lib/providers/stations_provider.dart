@@ -81,4 +81,8 @@ class StationsProvider with ChangeNotifier {
   get genres {
     return _genres;
   }
+
+  get currentStation {
+    return _currentStation;
+  }
 }
