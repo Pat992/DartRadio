@@ -20,7 +20,7 @@ class _TimeProgressState extends State<TimeProgress> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Text('${songProvider.getTimeToFinishFormatted()}',
+          Text('${songProvider.timeToFinishFormatted}',
             style: TextStyle(
               fontSize: 14,
             ),
@@ -28,13 +28,13 @@ class _TimeProgressState extends State<TimeProgress> {
           SizedBox(
             width: 100,
             child: FAProgressBar(
-              currentValue: songProvider.getpercentDone(),
+              currentValue: songProvider.percentDone,
               animatedDuration:	const Duration(milliseconds: 300),
               progressColor: Colors.green,
               size: 10
             ),
           ),
-          Text('${songProvider.getDurationFormatted()}',
+          Text('${songProvider.durationFormatted}',
             style: TextStyle(
               fontSize: 14,
             ),
