@@ -18,21 +18,27 @@ class StationListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ListTile(
-          leading: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 44, minWidth: 44),
-              child: Image.network(imageUrl)),
-          title: Text(title),
-          subtitle: Text(
-            description,
-            overflow: TextOverflow.ellipsis,
+    return Container(
+      color: Theme.of(context).primaryColorLight,
+      child: Column(
+        children: [
+          ListTile(
+            leading: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: 44, minWidth: 44),
+                child: Image.network(imageUrl)),
+            title: Text(title, style: Theme.of(context).textTheme.bodyText1),
+            subtitle: Text(
+              description,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
+            onTap: () => startPlaying(streamUrl),
           ),
-          onTap: () => startPlaying(streamUrl),
-        ),
-        Divider(),
-      ],
+          Divider(
+            color: Theme.of(context).accentColor,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -11,9 +11,9 @@ class StationList extends StatefulWidget {
 }
 
 class _StationListState extends State<StationList> {
-  bool _isLoading = false;
   PlayerHelper _player = PlayerHelper();
 
+  bool _isLoading = false;
   @override
   void initState() {
     callApi();
