@@ -81,7 +81,10 @@ class _StationListState extends State<StationList> {
                 width: MediaQuery.of(context).size.width,
                 child: IconButton(
                   icon: Icon(Icons.stop_circle_outlined),
-                  onPressed: _stopPlay,
+                  onPressed: () {
+                    _stopPlay();
+                    stationsProvider.setCurrentStation(Station());
+                  },
                 ),
               ),
             ],
