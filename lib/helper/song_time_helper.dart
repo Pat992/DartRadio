@@ -18,8 +18,20 @@ class SongTimeHelper {
     return endTime.difference(startTime);
   }
 
-  Duration timeLeft(){;
+  Duration timeToFinish(){
+    return new DateTime.now().difference(_startdate);
+  }
+
+  Duration timeLeft(){
     return _enddate.difference(new DateTime.now());
+  }
+
+  int minutesToFinish(){
+    return timeToFinish().inMinutes;
+  }
+
+  int secondsToFinish(){
+    return timeToFinish().inSeconds - (timeToFinish().inMinutes * 60);
   }
 
   int minutesLeft(){
@@ -31,7 +43,9 @@ class SongTimeHelper {
   }
 
   int percentPlayed(){
-    return (timeLeft().inSeconds * 100 / duration.inSeconds).round();
+    return (timeToFinish().inSeconds * 100 / duration.inSeconds).round();
   }
+
+
 
 }

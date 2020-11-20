@@ -8,11 +8,6 @@ import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.da
 class TimeProgress extends StatefulWidget {
 
   SongTimeHelper songTime;
-  var timer;
-  var seconds;
-  var minutes;
-  var duration;
-  var percentDone;
 
   // TODO add param for the start and endtime
   TimeProgress({this.songTime});
@@ -24,7 +19,6 @@ class TimeProgress extends StatefulWidget {
 
 class _TimeProgressState extends State<TimeProgress> {
 
-  var timer;
   var seconds;
   var minutes;
   var percentDone;
@@ -34,22 +28,18 @@ class _TimeProgressState extends State<TimeProgress> {
     super.initState();
     Timer.periodic (Duration(milliseconds: 150), (Timer t) {
       setState( () {
-        seconds = widget.songTime.secondsLeft();
-        minutes = widget.songTime.minutesLeft();
+        seconds = widget.songTime.secondsToFinish();
+        minutes = widget.songTime.minutesToFinish();
         percentDone = widget.songTime.percentPlayed();
       });
     });
-    // seconds = widget.songTime.secondsLeft();
-    // minutes = widget.songTime.minutesLeft();
-    // percentDone = widget.songTime.percentPlayed();
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Text('${ seconds } : ${ minutes }',
+        Text('$minutes : $seconds',
           style: TextStyle(
             fontSize: 22,
           ),
