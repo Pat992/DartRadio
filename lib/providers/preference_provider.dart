@@ -14,14 +14,18 @@ class PreferenceProvider with ChangeNotifier {
 
   get isDarkTheme {
     try {
-      return _prefs.getBool('isDarkTheme');
+      return _prefs.getBool('isDarkTheme') ?? false;
     } catch (e) {
       return false;
     }
   }
 
   get favorites {
-    return _favorites;
+    try {
+      return _prefs.getStringList('favorites') ?? [];
+    } catch (e) {
+      return [];
+    }
   }
 
   Future<void> setDarkTheme(bool themeSetting) async {
