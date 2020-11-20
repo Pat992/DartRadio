@@ -1,6 +1,7 @@
 import 'package:dart_radio/screens/play_screen.dart';
 import 'package:dart_radio/providers/stations_provider.dart';
 import 'package:dart_radio/screens/radio_mobile_screen.dart';
+import 'package:dart_radio/themes/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,9 +20,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'DartRadio',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: darkTheme,
         routes: {
           RadioMobileScreen.ROUTE_NAME: (context) => RadioMobileScreen()
         },
