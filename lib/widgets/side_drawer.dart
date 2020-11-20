@@ -1,4 +1,6 @@
+import 'package:dart_radio/providers/preference_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SideDrawer extends StatelessWidget {
   @override
@@ -12,7 +14,6 @@ class SideDrawer extends StatelessWidget {
               title: Text('App Drawer title'),
               automaticallyImplyLeading: false,
             ),
-            Divider(),
             ListTile(
               leading: Icon(
                 Icons.star,
@@ -23,7 +24,25 @@ class SideDrawer extends StatelessWidget {
                 style: TextStyle(color: Theme.of(context).backgroundColor),
               ),
               onTap: () {},
-            )
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(
+                Icons.brightness_4,
+                color: Theme.of(context).backgroundColor,
+              ),
+              title: Text(
+                'Dark Theme',
+                style: TextStyle(color: Theme.of(context).backgroundColor),
+              ),
+              trailing: Switch(
+                value: Provider.of<PreferenceProvider>(context).isDarkTheme,
+                onChanged: (value) {
+                  Provider.of<PreferenceProvider>(context, listen: false)
+                      .setDarkTheme(value);
+                },
+              ),
+            ),
           ],
         ),
       ),
