@@ -7,6 +7,8 @@ class Station {
   String _image;
   String _songUrl;
 
+  Station();
+
   Station.fromJson(Map<String, dynamic> jsonData) {
     _name = jsonData['name'];
     _displayName = jsonData['display_name'];

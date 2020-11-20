@@ -1,6 +1,4 @@
-import 'package:dart_radio/models/song.dart';
 import 'package:dart_radio/providers/song_provider.dart';
-import 'package:dart_radio/screens/play_screen.dart';
 import 'package:dart_radio/providers/preference_provider.dart';
 import 'package:dart_radio/screens/main_screen.dart';
 import 'package:dart_radio/providers/stations_provider.dart';

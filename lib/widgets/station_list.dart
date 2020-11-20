@@ -67,7 +67,10 @@ class _StationListState extends State<StationList> {
                     description: stations[index].description,
                     imageUrl: stations[index].image,
                     streamUrl: stations[index].streamUrl,
-                    startPlaying: _startPlay,
+                    startPlaying: (String url) {
+                      stationsProvider.setCurrentStation(stations[index]);
+                      _startPlay(url);
+                    },
                   ),
                 ),
               ),
