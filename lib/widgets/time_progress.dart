@@ -15,7 +15,7 @@ class _TimeProgressState extends State<TimeProgress> {
   Widget build(BuildContext context) {
     final songProvider = Provider.of<SongProvider>(context);
 
-    return Center(
+   return Center(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -26,7 +26,7 @@ class _TimeProgressState extends State<TimeProgress> {
             ),
           ),
           SizedBox(
-            width: 100,
+            width: MediaQuery.of(context).size.width * 0.75,
             child: FAProgressBar(
               currentValue: songProvider.percentDone,
               animatedDuration:	const Duration(milliseconds: 300),

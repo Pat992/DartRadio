@@ -36,8 +36,6 @@ class SongProvider with ChangeNotifier {
     });
   }
 
-
-
   get song{
     return _song;
   }
