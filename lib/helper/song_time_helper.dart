@@ -46,6 +46,10 @@ class SongTimeHelper {
     return (timeToFinish().inSeconds * 100 / duration.inSeconds).round();
   }
 
+  String durationFormatted(){
+    return duration.toString();
+  }
+
 
 
 }
