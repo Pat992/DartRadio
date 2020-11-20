@@ -36,6 +36,7 @@ class SideDrawer extends StatelessWidget {
                 style: TextStyle(color: Theme.of(context).backgroundColor),
               ),
               trailing: Switch(
+                activeColor: Theme.of(context).primaryColor,
                 value: Provider.of<PreferenceProvider>(context).isDarkTheme,
                 onChanged: (value) {
                   Provider.of<PreferenceProvider>(context, listen: false)
