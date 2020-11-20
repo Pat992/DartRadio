@@ -1,6 +1,5 @@
 import 'package:dart_radio/helper/player_helper.dart';
 import 'package:dart_radio/models/station.dart';
-import 'package:dart_radio/providers/preference_provider.dart';
 import 'package:dart_radio/providers/stations_provider.dart';
 import 'package:dart_radio/widgets/station_list_item.dart';
 import 'package:flutter/material.dart';
