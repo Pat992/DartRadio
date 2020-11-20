@@ -1,3 +1,5 @@
+import 'package:dart_radio/models/song.dart';
+import 'package:dart_radio/providers/song_provider.dart';
 import 'package:dart_radio/screens/play_screen.dart';
 import 'package:dart_radio/providers/stations_provider.dart';
 import 'package:dart_radio/screens/radio_mobile_screen.dart';
@@ -14,7 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => StationsProvider())
+        ChangeNotifierProvider(create: (context) => StationsProvider()),
+        ChangeNotifierProvider(create: (context) => SongProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
