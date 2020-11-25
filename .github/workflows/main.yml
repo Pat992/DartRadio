@@ -26,6 +26,8 @@ jobs:
       with:
         flutter-version: '1.12.x' # you can use 1.12
         channel: 'beta' # Currently you have to use beta channel for Flutter web.
+    - name: 'Run flutter pub get'
+      run: flutter pub get
     - name: Upgrades flutter
       run: flutter upgrade
       working-directory: ./example
