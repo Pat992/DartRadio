@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SearchList extends StatefulWidget with PreferredSizeWidget {
+  final bool searchStations;
+
+  const SearchList({Key key, this.searchStations = true}) : super(key: key);
   @override
   _SearchListState createState() => _SearchListState();
   @override
@@ -11,12 +14,17 @@ class SearchList extends StatefulWidget with PreferredSizeWidget {
 
 class _SearchListState extends State<SearchList> {
   final TextEditingController _filter = new TextEditingController();
+
   Icon _searchIcon = new Icon(Icons.search);
   Widget _appBarTitle = new Text('Dart Radio');
 
   updateList(_searchText) {
     Provider.of<StationsProvider>(context, listen: false)
         .getStations(searchText: _filter.text);
+  }
+
+  updateGenres(_searchText) {
+    Provider.of<StationsProvider>(context, listen: false).getGenres(searchText: _filter.text);
   }
 
   @override
@@ -50,7 +58,7 @@ class _SearchListState extends State<SearchList> {
         this._searchIcon = Icon(Icons.close);
         this._appBarTitle = TextField(
           controller: _filter,
-          onChanged: updateList,
+          onChanged:widget.searchStations ? updateList : updateGenres,
           decoration: InputDecoration(
               prefixIcon:
                   Icon(Icons.search, color: Theme.of(context).accentColor),

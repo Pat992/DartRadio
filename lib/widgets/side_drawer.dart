@@ -13,7 +13,7 @@ class SideDrawer extends StatelessWidget {
         child: Column(
           children: <Widget>[
             AppBar(
-              title: Text('App Drawer title'),
+              title: Text('Menu'),
               automaticallyImplyLeading: false,
             ),
             ListTile(
@@ -28,6 +28,22 @@ class SideDrawer extends StatelessWidget {
               onTap: () {
                 Provider.of<StationsProvider>(context, listen: false)
                     .toggleFavoriteStations(favorites: favorites);
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.list,
+                color: Theme.of(context).backgroundColor,
+              ),
+              title: Text(
+                'Genres',
+                style: TextStyle(color: Theme.of(context).backgroundColor),
+              ),
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  '/genre'
+                );
               },
             ),
             Divider(),

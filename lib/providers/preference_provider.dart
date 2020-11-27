@@ -9,7 +9,7 @@ class PreferenceProvider with ChangeNotifier {
   Future<void> initPreferences() async {
     _prefs = await SharedPreferences.getInstance();
     // _isDarkTheme = _prefs.getBool('isDarkTheme');
-    // _favorites = _prefs.getStringList('favorites');
+     _favorites = _prefs.getStringList('favorites') ?? [];
   }
 
   get isDarkTheme {

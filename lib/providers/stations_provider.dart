@@ -1,12 +1,15 @@
 import 'package:dart_radio/models/genre.dart';
 import 'package:dart_radio/models/station.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class StationsProvider with ChangeNotifier {
   List<Station> _stations;
   List<Station> _filteredStations;
+  List<Genre> _filteredGenres;
   List<Station> _favoriteStations;
   List<Genre> _genres;
   String _baseUrl;
@@ -21,6 +24,7 @@ class StationsProvider with ChangeNotifier {
     _genreUrl = 'genres';
     _stations = [];
     _filteredStations = [];
+    _filteredGenres = [];
     _genres = [];
     _currentStation = new Station();
     _isFavorite = false;
@@ -80,7 +84,9 @@ class StationsProvider with ChangeNotifier {
   }
 
   void getStations({String searchText = ""}) {
-    if (searchText.trim().isEmpty || searchText == null) {
+    if (searchText
+        .trim()
+        .isEmpty || searchText == null) {
       _filteredStations = _stations;
       notifyListeners();
       return;
@@ -98,23 +104,53 @@ class StationsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleFavoriteStations({List<dynamic> favorites}) {
+  Future<void> toggleFavoriteStations({List<dynamic> favorites}) async{
     _isFavorite = !_isFavorite;
+    await setUnsetFavorite(favorites);
+  }
+
+  Future<void> setUnsetFavorite(List<dynamic> favorites)
+    async {
     if (_isFavorite) {
       List<Station> tempList = [];
       for (int i = 0; i < _stations.length; i++) {
         for (int x = 0; x < favorites.length; x++) {
-          if (_stations[i].displayName.toLowerCase().contains(favorites)) {
+          if (_stations[i].name == favorites[x]) {
             tempList.add(_stations[i]);
           }
         }
       }
       _filteredStations = tempList;
-      print(_filteredStations);
       notifyListeners();
       return;
     }
     _filteredStations = _stations;
+    notifyListeners();
+  }
+
+  //todo
+  /*setFavIcon(bool _isFavorite){
+    Icon favoriteIcon;
+    if(_isFavorite){
+      favoriteIcon = Icon(Icons.star);
+    }else{
+      favoriteIcon = Icon(Icons.star_border);
+    }
+    return favoriteIcon;
+  }*/
+  void getGenres({String searchText = ""}) {
+    if (searchText.trim().isEmpty || searchText == null) {
+      _filteredGenres = _genres;
+      notifyListeners();
+    }
+    List<Genre> tempGenreList = [];
+    for (int i = 0; i < _genres.length; i++) {
+      if (_genres[i].genre.toLowerCase().contains(searchText.toLowerCase())) {
+
+        tempGenreList.add(_genres[i]);
+      }
+    }
+    _filteredGenres = tempGenreList;
     notifyListeners();
   }
 
@@ -123,7 +159,7 @@ class StationsProvider with ChangeNotifier {
   }
 
   get genres {
-    return _genres;
+    return _filteredGenres.length == 0 ? _genres : _filteredGenres;
   }
 
   get currentStation {

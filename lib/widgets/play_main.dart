@@ -4,8 +4,12 @@ import 'package:dart_radio/providers/stations_provider.dart';
 import 'package:dart_radio/widgets/time_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:async/async.dart';
 
 class PlayMain extends StatelessWidget {
+
+  AsyncMemoizer _memoizer = AsyncMemoizer();
+
   @override
   Widget build(BuildContext context) {
     final stationsProvider = Provider.of<StationsProvider>(context);
@@ -14,8 +18,10 @@ class PlayMain extends StatelessWidget {
     final currentStation = stationsProvider.currentStation;
 
     return FutureBuilder(
-        future: Provider.of<SongProvider>(context)
-            .setSongByUrl(stationsProvider.currentStation.songUrl),
+        future: this._memoizer.runOnce(() async {
+      return Provider.of<SongProvider>(context)
+          .setSongByUrl(stationsProvider.currentStation.songUrl);
+    }),
         builder: (context, future) {
           if (future.hasData)
             return Center(
