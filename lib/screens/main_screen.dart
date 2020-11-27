@@ -1,4 +1,5 @@
 import 'package:dart_radio/providers/preference_provider.dart';
+import 'package:dart_radio/screens/genre_screen.dart';
 import 'package:dart_radio/screens/radio_mobile_screen.dart';
 import 'package:dart_radio/themes/themes.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,8 @@ class MainScreen extends StatelessWidget {
             ? darkTheme
             : lightTheme,
         routes: {
-          RadioMobileScreen.ROUTE_NAME: (context) => RadioMobileScreen()
+          RadioMobileScreen.ROUTE_NAME: (context) => RadioMobileScreen(),
+          GenreScreen.ROUTE_NAME: (context) => GenreScreen()
         },
       ),
     );
