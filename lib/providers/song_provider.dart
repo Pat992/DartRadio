@@ -48,11 +48,20 @@ class SongProvider with ChangeNotifier {
   }
 
   Future<bool> setSongByUrl(String songUrl) async{
-    final response = await http.get(songUrl);
-    final extractedJson = json.decode(response.body);
-    final song = Song.fromJson(extractedJson);
-    this.song = song;
-    return true;
+    if(this.song != null){
+      try{
+        final response = await http.get(songUrl);
+        final extractedJson = json.decode(response.body);
+        final song = Song.fromJson(extractedJson);
+        this.song = song;
+        return true;
+      }catch(e){
+        print(e);
+      }
+    }
+
+    return false;
+
   }
 
   setThisState(){
