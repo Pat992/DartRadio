@@ -70,6 +70,10 @@ class _StationListState extends State<StationList> {
                     startPlaying: (String url) {
                       stationsProvider.setCurrentStation(stations[index]);
                       _startPlay(url);
+                      Navigator.pushNamed(
+                          context,
+                          '/play'
+                      );
                     },
                   ),
                 ),
