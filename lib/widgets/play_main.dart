@@ -1,3 +1,4 @@
+import 'package:dart_radio/providers/player_provider.dart';
 import 'package:dart_radio/providers/song_provider.dart';
 import 'package:dart_radio/providers/stations_provider.dart';
 import 'package:dart_radio/widgets/time_progress.dart';
@@ -9,6 +10,8 @@ class PlayMain extends StatelessWidget {
   Widget build(BuildContext context) {
     final stationsProvider = Provider.of<StationsProvider>(context);
     final songProvider = Provider.of<SongProvider>(context);
+    final player = Provider.of<PlayerProvider>(context);
+    final currentStation = stationsProvider.currentStation;
 
     return FutureBuilder(
         future: Provider.of<SongProvider>(context)
@@ -38,6 +41,19 @@ class PlayMain extends StatelessWidget {
                     Container(
                       child: TimeProgress(),
                     ),
+                    player.isPlaying
+                        ? IconButton(
+                            icon: Icon(Icons.stop),
+                            onPressed: () {
+                              player.stop();
+                            },
+                          )
+                        : IconButton(
+                            icon: Icon(Icons.play_arrow),
+                            onPressed: () {
+                              player.play(currentStation.streamUrl);
+                            },
+                          ),
                   ],
                 ),
               ),
