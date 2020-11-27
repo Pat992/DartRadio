@@ -31,8 +31,8 @@ class PlayMain extends StatelessWidget {
               ],
             ),
           ),
-          Text('${songProvider.song.artist? songProvider.song.artist: ""}'),
-          Text('${songProvider.song.title? songProvider.song.title: ""}'),
+          Text('${songProvider.song.artist}'),
+          Text('${songProvider.song.title}'),
           Container(
             child: TimeProgress(),
           ),

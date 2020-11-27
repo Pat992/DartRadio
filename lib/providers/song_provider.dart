@@ -7,6 +7,9 @@ import 'dart:convert';
 
 class SongProvider with ChangeNotifier {
 
+  DateTime TEST_START = DateTime.now().subtract(new Duration(seconds: 52));
+  DateTime TEST_END = DateTime.now().add(new Duration(seconds: 111));
+
   Song _song;
   SongTimeHelper _songTimeHelper;
   Timer _timer;
@@ -17,7 +20,7 @@ class SongProvider with ChangeNotifier {
 
   SongProvider(){
 
-    this._songTimeHelper = new SongTimeHelper(DateTime.now(), DateTime.now());
+    this._songTimeHelper = new SongTimeHelper(TEST_START, TEST_END);
     setThisState();
     _createTimer();
   }
@@ -42,16 +45,13 @@ class SongProvider with ChangeNotifier {
   set song(Song value){
     this._song = value;
     this._songTimeHelper = new SongTimeHelper(value.startedAt, value.endsAt);
+    // this._songTimeHelper = new SongTimeHelper(TEST_START, TEST_END);
   }
 
   Future<void> setSongByUrl(String songUrl) async{
-    try{
-      final response = await http.get(songUrl);
-      final extractedJson = json.decode(response.body);
-      final song = Song.fromJson(extractedJson);
-    }catch(e){
-      print(e);
-    }
+    final response = await http.get(songUrl);
+    final extractedJson = json.decode(response.body);
+    final song = Song.fromJson(extractedJson);
     this.song = song;
   }
 
@@ -72,5 +72,19 @@ class SongProvider with ChangeNotifier {
   get durationFormatted{
     return _durationFormatted;
   }
+
+  String getTTF(){
+    return "d";
+  }
+
+  int getPd(){
+    return 1;
+  }
+
+  String getDurF(){
+    return "4";
+  }
+
+
 
 }
