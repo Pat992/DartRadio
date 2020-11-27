@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.m426.dart_radio">
    <application
+       tools:replace="android:icon"
         android:label="dart_radio"
         android:icon="@mipmap/ic_launcher">
         <activity
