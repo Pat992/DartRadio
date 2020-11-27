@@ -12,6 +12,7 @@ class StationsProvider with ChangeNotifier {
   String _baseUrl;
   String _stationUrl;
   String _genreUrl;
+  Station _currentStation;
 
   StationsProvider() {
     _baseUrl = 'https://api.laut.fm/';
@@ -20,6 +21,7 @@ class StationsProvider with ChangeNotifier {
     _stations = [];
     _filteredStations = [];
     _genres = [];
+    _currentStation = new Station();
   }
 
   Future<void> getApiInformation() async {
@@ -66,6 +68,11 @@ class StationsProvider with ChangeNotifier {
     }
   }
 
+  setCurrentStation(Station station) {
+    _currentStation = station;
+    notifyListeners();
+  }
+
   get stations {
     return _filteredStations.length == 0 ? _stations : _filteredStations;
   }
@@ -92,5 +99,9 @@ class StationsProvider with ChangeNotifier {
 
   get genres {
     return _genres;
+  }
+
+  get currentStation {
+    return _currentStation;
   }
 }

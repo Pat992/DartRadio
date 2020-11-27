@@ -1,6 +1,7 @@
-import 'package:dart_radio/screens/play_screen.dart';
+import 'package:dart_radio/providers/song_provider.dart';
+import 'package:dart_radio/providers/preference_provider.dart';
+import 'package:dart_radio/screens/main_screen.dart';
 import 'package:dart_radio/providers/stations_provider.dart';
-import 'package:dart_radio/screens/radio_mobile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,18 +15,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => StationsProvider())
+        ChangeNotifierProvider(create: (context) => StationsProvider()),
+        ChangeNotifierProvider(create: (context) => SongProvider()),
+        ChangeNotifierProvider(create: (context) => PreferenceProvider())
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'DartRadio',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        routes: {
-          RadioMobileScreen.ROUTE_NAME: (context) => RadioMobileScreen()
-        },
-      ),
+      child: MainScreen(),
     );
   }
 }
