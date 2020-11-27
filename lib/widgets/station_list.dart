@@ -59,7 +59,15 @@ class _StationListState extends State<StationList> {
                 ),
               ),
               AnimatedContainer(
-                color: Theme.of(context).accentColor,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                        color: Theme.of(context).primaryColor,
+                        blurRadius: 2,
+                        spreadRadius: 2)
+                  ],
+                  color: Theme.of(context).accentColor,
+                ),
                 height: player.isPlaying ? 70 : 0,
                 duration: Duration(milliseconds: 200),
                 width: MediaQuery.of(context).size.width,
