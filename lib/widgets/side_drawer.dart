@@ -25,7 +25,10 @@ class SideDrawer extends StatelessWidget {
                 'Favorites',
                 style: TextStyle(color: Theme.of(context).backgroundColor),
               ),
-              onTap: (){Provider.of<StationsProvider>(context,listen: false).toggleFavoriteStations(favorites: favorites);},
+              onTap: () {
+                Provider.of<StationsProvider>(context, listen: false)
+                    .toggleFavoriteStations(favorites: favorites);
+              },
             ),
             ListTile(
               leading: Icon(

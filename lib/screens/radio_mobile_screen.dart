@@ -8,6 +8,7 @@ class RadioMobileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: SearchList(),
       drawer: SideDrawer(),
       body: StationList(),
