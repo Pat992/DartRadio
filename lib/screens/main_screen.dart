@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     Provider.of<PreferenceProvider>(context).initPreferences();
@@ -22,7 +21,7 @@ class MainScreen extends StatelessWidget {
             : lightTheme,
         routes: {
           RadioMobileScreen.ROUTE_NAME: (context) => RadioMobileScreen(),
-          GenreScreen.ROUTE_NAME: (context) => GenreScreen()
+          GenreScreen.ROUTE_NAME: (context) => GenreScreen(),
           PlayScreen.ROUTE_NAME: (context) => PlayScreen()
         },
       ),
