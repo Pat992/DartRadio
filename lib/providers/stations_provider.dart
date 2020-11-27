@@ -6,6 +6,7 @@ import 'dart:convert';
 
 class StationsProvider with ChangeNotifier {
   List<Station> _stations;
+  List<Station> _filteredStations;
   List<Station> _favoriteStations;
   List<Genre> _genres;
   String _baseUrl;
@@ -17,6 +18,7 @@ class StationsProvider with ChangeNotifier {
     _stationUrl = 'stations';
     _genreUrl = 'genres';
     _stations = [];
+    _filteredStations = [];
     _genres = [];
   }
 
@@ -39,6 +41,7 @@ class StationsProvider with ChangeNotifier {
         final station = Station.fromJson(element);
         _stations.add(station);
       });
+      _filteredStations = _stations;
     } catch (e) {
       print(e);
     }
@@ -64,8 +67,24 @@ class StationsProvider with ChangeNotifier {
   }
 
   get stations {
-    return _stations;
+    return _filteredStations.length == 0 ? _stations : _filteredStations;
   }
+
+  void getStations({String searchText = ""}) {
+    if (searchText.trim().isEmpty || searchText == null) {
+      _filteredStations = _stations;
+      notifyListeners();
+    }
+    List<Station> tempList = [];
+    for (int i = 0; i < _stations.length; i++) {
+      if (_stations[i].displayName.toLowerCase().contains(searchText.toLowerCase())) {
+
+        tempList.add(_stations[i]);
+      }
+    }
+    _filteredStations = tempList;
+    notifyListeners();
+}
 
   get favoriteStations {
     return _favoriteStations;
