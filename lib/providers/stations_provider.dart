@@ -2,6 +2,7 @@ import 'package:dart_radio/models/genre.dart';
 import 'package:dart_radio/models/station.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -122,6 +123,17 @@ class StationsProvider with ChangeNotifier {
     _filteredStations = _stations;
     notifyListeners();
   }
+
+  //todo
+  /*setFavIcon(bool _isFavorite){
+    Icon favoriteIcon;
+    if(_isFavorite){
+      favoriteIcon = Icon(Icons.star);
+    }else{
+      favoriteIcon = Icon(Icons.star_border);
+    }
+    return favoriteIcon;
+  }*/
 
   get favoriteStations {
     return _favoriteStations;
