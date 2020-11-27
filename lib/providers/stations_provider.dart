@@ -9,6 +9,7 @@ import 'dart:convert';
 class StationsProvider with ChangeNotifier {
   List<Station> _stations;
   List<Station> _filteredStations;
+  List<Genre> _filteredGenres;
   List<Station> _favoriteStations;
   List<Genre> _genres;
   String _baseUrl;
@@ -23,6 +24,7 @@ class StationsProvider with ChangeNotifier {
     _genreUrl = 'genres';
     _stations = [];
     _filteredStations = [];
+    _filteredGenres = [];
     _genres = [];
     _currentStation = new Station();
     _isFavorite = false;
@@ -134,13 +136,28 @@ class StationsProvider with ChangeNotifier {
     }
     return favoriteIcon;
   }*/
+  void getGenres({String searchText = ""}) {
+    if (searchText.trim().isEmpty || searchText == null) {
+      _filteredGenres = _genres;
+      notifyListeners();
+    }
+    List<Genre> tempGenreList = [];
+    for (int i = 0; i < _genres.length; i++) {
+      if (_genres[i].genre.toLowerCase().contains(searchText.toLowerCase())) {
+
+        tempGenreList.add(_genres[i]);
+      }
+    }
+    _filteredGenres = tempGenreList;
+    notifyListeners();
+  }
 
   get favoriteStations {
     return _favoriteStations;
   }
 
   get genres {
-    return _genres;
+    return _filteredGenres.length == 0 ? _genres : _filteredGenres;
   }
 
   get currentStation {
