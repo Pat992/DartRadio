@@ -1,10 +1,12 @@
 import 'package:dart_radio/providers/preference_provider.dart';
+import 'package:dart_radio/providers/stations_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SideDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var favorites = Provider.of<PreferenceProvider>(context).favorites;
     return Drawer(
       child: Container(
         color: Theme.of(context).accentColor,
@@ -23,7 +25,7 @@ class SideDrawer extends StatelessWidget {
                 'Favorites',
                 style: TextStyle(color: Theme.of(context).backgroundColor),
               ),
-              onTap: () {},
+              onTap: (){Provider.of<StationsProvider>(context,listen: false).toggleFavoriteStations(favorites: favorites);},
             ),
             ListTile(
               leading: Icon(

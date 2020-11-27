@@ -1,5 +1,6 @@
 import 'package:dart_radio/models/genre.dart';
 import 'package:dart_radio/models/station.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -14,6 +15,7 @@ class StationsProvider with ChangeNotifier {
   String _stationUrl;
   String _genreUrl;
   Station _currentStation;
+  bool _isFavorite;
 
   StationsProvider() {
     _baseUrl = 'https://api.laut.fm/';
@@ -24,6 +26,7 @@ class StationsProvider with ChangeNotifier {
     _filteredGenres = [];
     _genres = [];
     _currentStation = new Station();
+    _isFavorite = false;
   }
 
   Future<void> getApiInformation() async {
@@ -76,24 +79,51 @@ class StationsProvider with ChangeNotifier {
   }
 
   get stations {
-    return _filteredStations.length == 0 ? _stations : _filteredStations;
+    return _filteredStations; //.length == 0 ? _stations : _filteredStations;
   }
 
   void getStations({String searchText = ""}) {
-    if (searchText.trim().isEmpty || searchText == null) {
+    if (searchText
+        .trim()
+        .isEmpty || searchText == null) {
       _filteredStations = _stations;
       notifyListeners();
+      return;
     }
     List<Station> tempList = [];
     for (int i = 0; i < _stations.length; i++) {
-      if (_stations[i].displayName.toLowerCase().contains(searchText.toLowerCase())) {
-
+      if (_stations[i].displayName.toLowerCase().contains(
+          searchText.toLowerCase())) {
         tempList.add(_stations[i]);
       }
     }
     _filteredStations = tempList;
     notifyListeners();
-}
+  }
+
+  Future<void> toggleFavoriteStations({List<dynamic> favorites}) async{
+    _isFavorite = !_isFavorite;
+    await setUnsetFavorite(favorites);
+  }
+
+  Future<void> setUnsetFavorite(List<dynamic> favorites)
+    async {
+    if (_isFavorite) {
+      List<Station> tempList = [];
+      for (int i = 0; i < _stations.length; i++) {
+        for (int x = 0; x < favorites.length; x++) {
+          if (_stations[i].name == favorites[x]) {
+            tempList.add(_stations[i]);
+          }
+        }
+      }
+      _filteredStations = tempList;
+      notifyListeners();
+      return;
+    }
+    _filteredStations = _stations;
+    notifyListeners();
+  }
 
   void getGenres({String searchText = ""}) {
     if (searchText.trim().isEmpty || searchText == null) {

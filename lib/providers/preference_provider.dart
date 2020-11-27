@@ -9,7 +9,7 @@ class PreferenceProvider with ChangeNotifier {
   Future<void> initPreferences() async {
     _prefs = await SharedPreferences.getInstance();
     // _isDarkTheme = _prefs.getBool('isDarkTheme');
-    // _favorites = _prefs.getStringList('favorites');
+     _favorites = _prefs.getStringList('favorites') ?? [];
   }
 
   get isDarkTheme {
@@ -34,8 +34,10 @@ class PreferenceProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setFavorite(List<String> stations) async {
-    _favorites = stations;
+  Future<void> toggleFavorites(String stationName) async {
+    _favorites.contains(stationName) ? _favorites.remove(stationName) : _favorites.add(stationName);
     await _prefs.setStringList('favorites', _favorites);
+    notifyListeners();
   }
+
 }
