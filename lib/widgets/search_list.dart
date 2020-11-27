@@ -43,7 +43,7 @@ class _SearchListState extends State<SearchList> {
           controller: _filter,
           onChanged: updateList,
           decoration: InputDecoration(
-              prefixIcon: Icon(Icons.search),
+              prefixIcon: Icon(Icons.search, color: Theme.of(context).accentColor),
               hintText: 'Search...'
           ),
         );
