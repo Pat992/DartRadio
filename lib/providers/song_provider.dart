@@ -45,14 +45,14 @@ class SongProvider with ChangeNotifier {
   set song(Song value){
     this._song = value;
     this._songTimeHelper = new SongTimeHelper(value.startedAt, value.endsAt);
-    // this._songTimeHelper = new SongTimeHelper(TEST_START, TEST_END);
   }
 
-  Future<void> setSongByUrl(String songUrl) async{
+  Future<bool> setSongByUrl(String songUrl) async{
     final response = await http.get(songUrl);
     final extractedJson = json.decode(response.body);
     final song = Song.fromJson(extractedJson);
     this.song = song;
+    return true;
   }
 
   setThisState(){
@@ -72,19 +72,4 @@ class SongProvider with ChangeNotifier {
   get durationFormatted{
     return _durationFormatted;
   }
-
-  String getTTF(){
-    return "d";
-  }
-
-  int getPd(){
-    return 1;
-  }
-
-  String getDurF(){
-    return "4";
-  }
-
-
-
 }

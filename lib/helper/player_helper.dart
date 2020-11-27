@@ -8,6 +8,7 @@ class PlayerHelper {
   }
 
   Future<void> play(String songUrl) async {
+    _player.stop();
     await _player.play(songUrl);
   }
 

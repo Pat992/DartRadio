@@ -11,7 +11,7 @@ class PlayScreen extends StatelessWidget {
           title: Text('DartRadio'),
         ),
         body: Container(
-          child: new PlayMain(),
+          child: PlayMain(),
         ));
   }
 }
