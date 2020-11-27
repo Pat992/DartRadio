@@ -7,9 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     Provider.of<PreferenceProvider>(context).initPreferences();
+
     return FutureBuilder(
       future: Provider.of<PreferenceProvider>(context).initPreferences(),
       builder: (context, future) => MaterialApp(
