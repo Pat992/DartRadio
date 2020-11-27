@@ -11,17 +11,18 @@ class PlayMain extends StatelessWidget {
     final stationsProvider = Provider.of<StationsProvider>(context);
     final songProvider = Provider.of<SongProvider>(context);
 
-    var _heigth = MediaQuery.of(context).size.width;
+    var _height = MediaQuery.of(context).size.height;
     return FutureBuilder(
-      future: Provider.of<SongProvider>(context).setSongByUrl(stationsProvider.currentStation.songUrl),
+      future: Provider.of<SongProvider>(context)
+          .setSongByUrl(stationsProvider.currentStation.songUrl),
       builder: (context, future) => Column(
         children: [
           SizedBox(
-              height: _heigth * 0.2,
+              height: _height * 0.2,
               child: Text('${stationsProvider.currentStation.displayName}')
           ),
           SizedBox(
-            height: _heigth * 0.5,
+            height: _height * 0.5,
             child: Row(
               children: <Widget>[
                 Text("arr right"),
@@ -30,8 +31,8 @@ class PlayMain extends StatelessWidget {
               ],
             ),
           ),
-          Text('${songProvider.song.artist}'),
-          Text('${songProvider.song.title}'),
+          Text('${songProvider.song.artist? songProvider.song.artist: ""}'),
+          Text('${songProvider.song.title? songProvider.song.title: ""}'),
           Container(
             child: TimeProgress(),
           ),
