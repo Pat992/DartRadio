@@ -1,8 +1,9 @@
 import 'dart:async';
-
+import 'package:http/http.dart' as http;
 import 'package:dart_radio/helper/song_time_helper.dart';
 import 'package:dart_radio/models/song.dart';
 import 'package:flutter/foundation.dart';
+import 'dart:convert';
 
 class SongProvider with ChangeNotifier {
 
@@ -18,6 +19,7 @@ class SongProvider with ChangeNotifier {
   int _percentDone;
 
   SongProvider(){
+
     this._songTimeHelper = new SongTimeHelper(TEST_START, TEST_END);
     setThisState();
     _createTimer();
@@ -42,8 +44,15 @@ class SongProvider with ChangeNotifier {
 
   set song(Song value){
     this._song = value;
-    // this._songTimeHelper = new SongTimeHelper(value.startedAt, value.endsAt);
-    this._songTimeHelper = new SongTimeHelper(TEST_START, TEST_END);
+    this._songTimeHelper = new SongTimeHelper(value.startedAt, value.endsAt);
+    // this._songTimeHelper = new SongTimeHelper(TEST_START, TEST_END);
+  }
+
+  Future<void> setSongByUrl(String songUrl) async{
+    final response = await http.get(songUrl);
+    final extractedJson = json.decode(response.body);
+    final song = Song.fromJson(extractedJson);
+    this.song = song;
   }
 
   setThisState(){

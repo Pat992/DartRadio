@@ -1,3 +1,4 @@
+import 'package:dart_radio/models/song.dart';
 import 'package:dart_radio/providers/song_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
@@ -14,7 +15,6 @@ class _TimeProgressState extends State<TimeProgress> {
   @override
   Widget build(BuildContext context) {
     final songProvider = Provider.of<SongProvider>(context);
-
    return Center(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
