@@ -1,5 +1,6 @@
 import 'package:dart_radio/models/genre.dart';
 import 'package:dart_radio/models/station.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -80,41 +81,47 @@ class StationsProvider with ChangeNotifier {
   }
 
   void getStations({String searchText = ""}) {
-    if (searchText.trim().isEmpty || searchText == null) {
+    if (searchText
+        .trim()
+        .isEmpty || searchText == null) {
       _filteredStations = _stations;
       notifyListeners();
       return;
     }
     List<Station> tempList = [];
     for (int i = 0; i < _stations.length; i++) {
-      if (_stations[i].displayName.toLowerCase().contains(searchText.toLowerCase())) {
-
+      if (_stations[i].displayName.toLowerCase().contains(
+          searchText.toLowerCase())) {
         tempList.add(_stations[i]);
       }
     }
     _filteredStations = tempList;
     notifyListeners();
-}
+  }
 
-void toggleFavoriteStations({List<dynamic> favorites}) {
+  Future<void> toggleFavoriteStations({List<dynamic> favorites}) async{
     _isFavorite = !_isFavorite;
-    if (_isFavorite){
+    await setUnsetFavorite(favorites);
+  }
+
+  Future<void> setUnsetFavorite(List<dynamic> favorites)
+    async {
+    if (_isFavorite) {
       List<Station> tempList = [];
       for (int i = 0; i < _stations.length; i++) {
-        for (int x = 0; x < favorites.length; x++){
-          if (_stations[i].displayName.toLowerCase().contains(favorites)) {
+        for (int x = 0; x < favorites.length; x++) {
+          if (_stations[i].name == favorites[x]) {
             tempList.add(_stations[i]);
           }
         }
       }
       _filteredStations = tempList;
-      print(_filteredStations);
       notifyListeners();
       return;
     }
     _filteredStations = _stations;
     notifyListeners();
-}
+  }
 
   get favoriteStations {
     return _favoriteStations;
