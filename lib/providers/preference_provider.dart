@@ -35,9 +35,10 @@ class PreferenceProvider with ChangeNotifier {
   }
 
   Future<void> toggleFavorites(String stationName) async {
-    _favorites.contains(stationName) ? _favorites.remove(stationName) : _favorites.add(stationName);
+    _favorites.contains(stationName)
+        ? _favorites.remove(stationName)
+        : _favorites.add(stationName);
     await _prefs.setStringList('favorites', _favorites);
     notifyListeners();
   }
-
 }

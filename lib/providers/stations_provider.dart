@@ -76,7 +76,7 @@ class StationsProvider with ChangeNotifier {
   }
 
   get stations {
-    return _filteredStations; //.length == 0 ? _stations : _filteredStations;
+    return _filteredStations.length == 0 ? _stations : _filteredStations;
   }
 
   void getStations({String searchText = ""}) {
@@ -87,21 +87,23 @@ class StationsProvider with ChangeNotifier {
     }
     List<Station> tempList = [];
     for (int i = 0; i < _stations.length; i++) {
-      if (_stations[i].displayName.toLowerCase().contains(searchText.toLowerCase())) {
-
+      if (_stations[i]
+          .displayName
+          .toLowerCase()
+          .contains(searchText.toLowerCase())) {
         tempList.add(_stations[i]);
       }
     }
     _filteredStations = tempList;
     notifyListeners();
-}
+  }
 
-void toggleFavoriteStations({List<dynamic> favorites}) {
+  void toggleFavoriteStations({List<dynamic> favorites}) {
     _isFavorite = !_isFavorite;
-    if (_isFavorite){
+    if (_isFavorite) {
       List<Station> tempList = [];
       for (int i = 0; i < _stations.length; i++) {
-        for (int x = 0; x < favorites.length; x++){
+        for (int x = 0; x < favorites.length; x++) {
           if (_stations[i].displayName.toLowerCase().contains(favorites)) {
             tempList.add(_stations[i]);
           }
@@ -114,7 +116,7 @@ void toggleFavoriteStations({List<dynamic> favorites}) {
     }
     _filteredStations = _stations;
     notifyListeners();
-}
+  }
 
   get favoriteStations {
     return _favoriteStations;
