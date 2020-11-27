@@ -7,9 +7,6 @@ import 'dart:convert';
 
 class SongProvider with ChangeNotifier {
 
-  DateTime TEST_START = DateTime.now().subtract(new Duration(seconds: 52));
-  DateTime TEST_END = DateTime.now().add(new Duration(seconds: 111));
-
   Song _song;
   SongTimeHelper _songTimeHelper;
   Timer _timer;
@@ -20,9 +17,12 @@ class SongProvider with ChangeNotifier {
 
   SongProvider(){
 
-    this._songTimeHelper = new SongTimeHelper(TEST_START, TEST_END);
+    this._songTimeHelper = new SongTimeHelper(
+        DateTime.now().subtract(new Duration(seconds: 1)),
+        DateTime.now().add(new Duration(seconds: 1))
+    );
     setThisState();
-    _createTimer();
+    this._timer = _createTimer();
   }
 
   @override
