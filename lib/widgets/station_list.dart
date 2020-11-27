@@ -1,5 +1,6 @@
 import 'package:dart_radio/helper/player_helper.dart';
 import 'package:dart_radio/models/station.dart';
+import 'package:dart_radio/providers/song_provider.dart';
 import 'package:dart_radio/providers/stations_provider.dart';
 import 'package:dart_radio/widgets/station_list_item.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,7 @@ class _StationListState extends State<StationList> {
   Widget build(BuildContext context) {
     //List<Station> stations = [];
     final stationsProvider = Provider.of<StationsProvider>(context);
+    final songProvider = Provider.of<SongProvider>(context);
     final List<Station> stations = stationsProvider.stations;
 
     return _isLoading
