@@ -63,12 +63,12 @@ class _StationListState extends State<StationList> {
                   boxShadow: [
                     BoxShadow(
                         color: Theme.of(context).primaryColor,
-                        blurRadius: 2,
-                        spreadRadius: 2)
+                        blurRadius: 1,
+                        spreadRadius: 1)
                   ],
                   color: Theme.of(context).accentColor,
                 ),
-                height: player.isPlaying ? 70 : 0,
+                height: player.isPlaying ? 60 : 0,
                 duration: Duration(milliseconds: 200),
                 width: MediaQuery.of(context).size.width,
                 child: IconButton(
