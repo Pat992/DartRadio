@@ -72,7 +72,6 @@ class _StationListState extends State<StationList> {
                     startPlaying: (String url) {
                       stationsProvider.setCurrentStation(stations[index]);
                       _startPlay(url);
-                      songProvider.song = null; //reset current song
                       Navigator.pushNamed(
                           context,
                           '/play'

@@ -22,7 +22,7 @@ class SongProvider with ChangeNotifier {
         DateTime.now().add(new Duration(seconds: 1))
     );
     setThisState();
-    this._timer = _createTimer();
+    _createTimer();
   }
 
   @override
@@ -48,18 +48,16 @@ class SongProvider with ChangeNotifier {
   }
 
   Future<bool> setSongByUrl(String songUrl) async{
-    if(this.song != null){
-      try{
-        final response = await http.get(songUrl);
-        final extractedJson = json.decode(response.body);
-        final song = Song.fromJson(extractedJson);
-        this.song = song;
-        return true;
-      }catch(e){
-        print(e);
-      }
+    try{
+      final response = await http.get(songUrl);
+      final extractedJson = json.decode(response.body);
+      final song = Song.fromJson(extractedJson);
+      this.song = song;
+      return true;
+    }catch(e){
+      print(e);
+      return false;
     }
-
     return false;
 
   }
