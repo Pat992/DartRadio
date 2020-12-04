@@ -24,8 +24,12 @@ class StationListItem extends StatelessWidget {
         children: [
           ListTile(
             leading: ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 44, minWidth: 44),
-                child: Image.network(imageUrl)),
+              constraints: BoxConstraints(maxWidth: 44, minWidth: 44),
+              child: Hero(
+                tag: title,
+                child: Image.network(imageUrl),
+              ),
+            ),
             title: Text(title, style: Theme.of(context).textTheme.bodyText1),
             subtitle: Text(
               description,
