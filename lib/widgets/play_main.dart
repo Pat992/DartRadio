@@ -17,6 +17,12 @@ class PlayMain extends StatelessWidget {
     final player = Provider.of<PlayerProvider>(context);
     final currentStation = stationsProvider.currentStation;
 
+   if(songProvider.fetchNewSongCheck()){
+      songProvider.setSongByUrl(stationsProvider.currentStation.songUrl);
+   }
+
+    var _height = MediaQuery.of(context).size.height;
+
     return FutureBuilder(
         future: this._memoizer.runOnce(() async {
       return Provider.of<SongProvider>(context)

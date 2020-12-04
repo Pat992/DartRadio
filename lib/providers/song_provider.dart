@@ -11,6 +11,10 @@ class SongProvider with ChangeNotifier {
   SongTimeHelper _songTimeHelper;
   Timer _timer;
 
+  //timer and bool needed to delay fetches of new songs
+  Timer _delayFetchTimer;
+  bool _delayFetchFlag = true;
+
   String _timeToFinishFormatted;
   String _durationFormatted;
   int _percentDone;
@@ -22,12 +26,12 @@ class SongProvider with ChangeNotifier {
         DateTime.now().add(new Duration(seconds: 1))
     );
     setThisState();
-    _createTimer();
+    _timer = _createTimer();
   }
 
   @override
   void dispose() {
-    _timer.cancel();
+    this._cancelTimers();
     super.dispose();
   }
 
@@ -59,13 +63,38 @@ class SongProvider with ChangeNotifier {
       return false;
     }
     return false;
-
   }
 
   setThisState(){
     this._durationFormatted = this._songTimeHelper.durationFormatted();
     this._percentDone = this._songTimeHelper.percentPlayed();
     this._timeToFinishFormatted = this._songTimeHelper.timeToFinishFormatted();
+  }
+
+  //checks if the current song is finished and new song can be fetched
+  fetchNewSongCheck(){
+    if (this._songTimeHelper.timeLeft().inSeconds <= 0 && this._delayFetchFlag){
+      this._delayFetchTimer = this._createDelayFetchTimer();
+      this._delayFetchFlag = false;
+      return true;
+    }
+    return false;
+  }
+
+  // timer to delay the fetch of a new song
+  _createDelayFetchTimer(){
+    return Timer.periodic (Duration(milliseconds: 5000), (Timer t) {
+      this._delayFetchFlag = true;
+      this._delayFetchTimer.cancel();
+    });
+  }
+
+  //cancel all timers
+  _cancelTimers(){
+    this._timer.cancel();
+    if (_delayFetchTimer != null) {
+      _delayFetchTimer.cancel();
+    }
   }
 
   get timeToFinishFormatted{
