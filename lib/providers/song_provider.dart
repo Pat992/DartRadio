@@ -22,7 +22,7 @@ class SongProvider with ChangeNotifier {
         DateTime.now().add(new Duration(seconds: 1))
     );
     setThisState();
-    _createTimer();
+    _timer = _createTimer();
   }
 
   @override
@@ -66,6 +66,10 @@ class SongProvider with ChangeNotifier {
     this._durationFormatted = this._songTimeHelper.durationFormatted();
     this._percentDone = this._songTimeHelper.percentPlayed();
     this._timeToFinishFormatted = this._songTimeHelper.timeToFinishFormatted();
+  }
+
+  checkSongFinished(){
+    return this._songTimeHelper.timeLeft().inSeconds <= 1;
   }
 
   get timeToFinishFormatted{
