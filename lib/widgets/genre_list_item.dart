@@ -1,4 +1,6 @@
+import 'package:dart_radio/providers/stations_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class GenreListItem extends StatelessWidget {
   final String title;
@@ -18,7 +20,10 @@ class GenreListItem extends StatelessWidget {
         children: [
           ListTile(
             title: Text(title, style: Theme.of(context).textTheme.bodyText1),
-            onTap: (/*TODO: take taped genre as filter*/) { },
+            onTap: () {
+              Provider.of<StationsProvider>(context, listen: false).getStationsByGenre(genres: title);
+              Navigator.pop(context);
+            },
           ),
           Divider(
             color: Theme.of(context).accentColor,
