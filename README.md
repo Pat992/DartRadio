@@ -1,14 +1,14 @@
+
 # DartRadio
 
-[![DartRadio Image](https://github.com/Pat992/DartRadio/blob/main/lib/documentation/design/IconsPNG/favicon.png =100x20)](https://pat992.github.io/DartRadio/#/)
-<sub><sup>_(Click the image to listen DartRadio)_</sup></sub>
+[<img src="https://github.com/Pat992/DartRadio/blob/main/web/favicon.svg" width="300" height="300">](https://pat992.github.io/DartRadio/#/)
 
+<sub><sup>_(Click the image to listen DartRadio)_</sup></sub>
 
 
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
-* [Setup](#setup)
 * [laut.fm](#laut.fm)
 
 ## General info
@@ -21,9 +21,6 @@ A list of technologies used within the project:
 * [Dart](https://dart.dev/): Version 2.10.0
 * [Android Studio](https://developer.android.com/studio): Version 4.1.1
 * [laut.fm API](https://api.laut.fm/)
-
-
-## Setup
 
 
 ### laut.fm
