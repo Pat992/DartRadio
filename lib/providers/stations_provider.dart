@@ -170,7 +170,7 @@ class StationsProvider with ChangeNotifier {
         if (_stations[i]
             .genres[x]
             .toLowerCase()
-            .contains(genres.toLowerCase())) {
+            == (genres.toLowerCase())) {
           tempList.add(_stations[i]);
         }
       }
