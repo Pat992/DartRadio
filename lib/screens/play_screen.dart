@@ -7,14 +7,23 @@ import 'package:provider/provider.dart';
 class PlayScreen extends StatelessWidget {
   static const ROUTE_NAME = '/play';
 
-
   @override
   Widget build(BuildContext context) {
     var _stationProvider = Provider.of<StationsProvider>(context);
     var _preferenceProvider = Provider.of<PreferenceProvider>(context);
     return Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
-          title: Text('DartRadio'),
+          bottom: PreferredSize(
+            child: Container(
+              color: Theme.of(context).accentColor,
+              height: 2.0,
+            ),
+            preferredSize: Size.fromHeight(4.0),
+          ),
+          title: Text(Provider.of<StationsProvider>(context)
+              .currentStation
+              .displayName),
           actions: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
@@ -25,7 +34,6 @@ class PlayScreen extends StatelessWidget {
                     _stationProvider.setUnsetFavorite(Provider.of<PreferenceProvider>(context,listen: false).favorites);
                     },
                 ),
-
             ),
           ],
         ),

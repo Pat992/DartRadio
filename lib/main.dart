@@ -1,3 +1,4 @@
+import 'package:dart_radio/providers/player_provider.dart';
 import 'package:dart_radio/providers/song_provider.dart';
 import 'package:dart_radio/providers/preference_provider.dart';
 import 'package:dart_radio/screens/main_screen.dart';
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => StationsProvider()),
         ChangeNotifierProvider(create: (context) => SongProvider()),
-        ChangeNotifierProvider(create: (context) => PreferenceProvider())
+        ChangeNotifierProvider(create: (context) => PreferenceProvider()),
+        ChangeNotifierProvider(create: (context) => PlayerProvider())
       ],
       child: MainScreen(),
     );
