@@ -16,7 +16,7 @@ class _TimeProgressState extends State<TimeProgress> {
     return Center(
       child: Container(
         width: kIsWeb
-            ? MediaQuery.of(context).size.width * 0.5
+            ? MediaQuery.of(context).size.width * 0.4
             : MediaQuery.of(context).size.width * 0.9,
         child: Column(
           children: <Widget>[

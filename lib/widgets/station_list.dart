@@ -64,8 +64,7 @@ class _StationListState extends State<StationList> {
                 ),
               ),
               if (!kIsWeb) MobileFooter(),
-              if (kIsWeb && stationsProvider.currentStation.name != null)
-                WebFooter(),
+              if (kIsWeb) WebFooter(),
             ],
           );
   }

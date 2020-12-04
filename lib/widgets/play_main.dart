@@ -1,3 +1,4 @@
+import 'package:dart_radio/models/station.dart';
 import 'package:dart_radio/providers/player_provider.dart';
 import 'package:dart_radio/providers/song_provider.dart';
 import 'package:dart_radio/providers/stations_provider.dart';
@@ -59,35 +60,56 @@ class PlayMain extends StatelessWidget {
                       ),
                     ),
                   )
-                : Expanded(
-                    child: Container(
-                      width: MediaQuery.of(context).size.height * 0.9,
-                      height: 200,
-                      padding: EdgeInsets.all(20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.network(
-                            '${stationsProvider.currentStation.image}',
-                            height: MediaQuery.of(context).size.height * 0.8,
-                          ),
-                          TimeProgress(),
-                          player.isPlaying
-                              ? IconButton(
-                                  icon: Icon(Icons.stop),
-                                  onPressed: () {
-                                    player.stop();
-                                  },
-                                )
-                              : IconButton(
-                                  icon: Icon(Icons.play_arrow),
-                                  onPressed: () {
-                                    player.play(currentStation.streamUrl);
-                                  },
-                                ),
-                        ],
-                      ),
+                : Container(
+                    width: MediaQuery.of(context).size.height * 0.9,
+                    height: 200,
+                    padding: EdgeInsets.only(
+                        left: 20, top: 20, bottom: 20, right: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.network(
+                              '${stationsProvider.currentStation.image}',
+                              height: MediaQuery.of(context).size.height * 0.8,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            TimeProgress(),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            player.isPlaying
+                                ? IconButton(
+                                    icon: Icon(Icons.stop),
+                                    color: Theme.of(context).primaryColor,
+                                    onPressed: () {
+                                      player.stop();
+                                    },
+                                  )
+                                : IconButton(
+                                    icon: Icon(Icons.play_arrow),
+                                    color: Theme.of(context).primaryColor,
+                                    onPressed: () {
+                                      player.play(currentStation.streamUrl);
+                                    },
+                                  ),
+                          ],
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.close),
+                          color: Theme.of(context).primaryColor,
+                          onPressed: () {
+                            stationsProvider.setCurrentStation(Station());
+                            player.stop();
+                          },
+                        ),
+                      ],
                     ),
                   );
           return Text("loading...");
