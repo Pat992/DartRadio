@@ -1,7 +1,10 @@
 import 'package:dart_radio/models/station.dart';
 import 'package:dart_radio/providers/player_provider.dart';
 import 'package:dart_radio/providers/stations_provider.dart';
+import 'package:dart_radio/widgets/mobile_footer.dart';
 import 'package:dart_radio/widgets/station_list_item.dart';
+import 'package:dart_radio/widgets/web_footer.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,32 +35,15 @@ class _StationListState extends State<StationList> {
                     startPlaying: (String url) {
                       stationsProvider.setCurrentStation(stations[index]);
                       player.play(url);
-                      Navigator.pushNamed(context, '/play');
+                      if (!kIsWeb) {
+                        Navigator.pushNamed(context, '/play');
+                      }
                     },
                   ),
                 ),
               ),
-              AnimatedContainer(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                        color: Theme.of(context).primaryColor,
-                        blurRadius: 1,
-                        spreadRadius: 1)
-                  ],
-                  color: Theme.of(context).accentColor,
-                ),
-                height: player.isPlaying ? 60 : 0,
-                duration: Duration(milliseconds: 200),
-                width: MediaQuery.of(context).size.width,
-                child: IconButton(
-                  icon: Icon(Icons.stop_circle_outlined),
-                  onPressed: () {
-                    player.stop();
-                    stationsProvider.setCurrentStation(Station());
-                  },
-                ),
-              ),
+              if (!kIsWeb) MobileFooter(),
+              if (kIsWeb) WebFooter(),
             ],
           );
   }

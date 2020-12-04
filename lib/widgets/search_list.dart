@@ -57,6 +57,7 @@ class _SearchListState extends State<SearchList> {
       if (this._searchIcon.icon == Icons.search) {
         this._searchIcon = Icon(Icons.close);
         this._appBarTitle = TextField(
+          autofocus: true,
           controller: _filter,
           onChanged:widget.searchStations ? updateList : updateGenres,
           decoration: InputDecoration(
