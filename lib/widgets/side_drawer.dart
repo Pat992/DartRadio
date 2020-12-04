@@ -26,9 +26,12 @@ class SideDrawer extends StatelessWidget {
                 style: TextStyle(color: Theme.of(context).backgroundColor),
               ),
               onTap: () {
+                Scaffold.of(context).openDrawer();
                 Provider.of<StationsProvider>(context, listen: false)
                     .toggleFavoriteStations(favorites: favorites);
+                Navigator.of(context).pop();
               },
+
             ),
             ListTile(
               leading: Icon(
@@ -40,6 +43,7 @@ class SideDrawer extends StatelessWidget {
                 style: TextStyle(color: Theme.of(context).backgroundColor),
               ),
               onTap: () {
+                Navigator.of(context).pop();
                 Navigator.pushNamed(
                   context,
                   '/genre'
