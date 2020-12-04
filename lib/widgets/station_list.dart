@@ -11,25 +11,6 @@ class StationList extends StatefulWidget {
 }
 
 class _StationListState extends State<StationList> {
-  bool _isLoading = false;
-  @override
-  void initState() {
-    callApi();
-    super.initState();
-  }
-
-  Future<void> callApi() async {
-    setState(() {
-      _isLoading = true;
-    });
-
-    await Provider.of<StationsProvider>(context, listen: false)
-        .getApiInformation();
-
-    setState(() {
-      _isLoading = false;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +18,7 @@ class _StationListState extends State<StationList> {
     final stationsProvider = Provider.of<StationsProvider>(context);
     final List<Station> stations = stationsProvider.stations;
 
-    return _isLoading
-        ? Center(child: CircularProgressIndicator())
-        : Column(
+    return Column(
             children: <Widget>[
               Expanded(
                 child: ListView.builder(
