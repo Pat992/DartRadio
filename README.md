@@ -1,6 +1,6 @@
 # DartRadio
 
-[![DartRadio Image](https://github.com/Pat992/DartRadio/blob/main/lib/documentation/design/IconsPNG/favicon.png =100x20)](https://pat992.github.io/DartRadio/#/)
+[<img src="https://github.com/Pat992/DartRadio/blob/main/lib/documentation/design/IconsPNG/favicon.png" width="400" height="400">](https://pat992.github.io/DartRadio/#/)
 <sub><sup>_(Click the image to listen DartRadio)_</sup></sub>
 
 
