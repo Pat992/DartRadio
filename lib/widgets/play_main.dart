@@ -9,11 +9,13 @@ import 'package:provider/provider.dart';
 import 'package:async/async.dart';
 
 class PlayMain extends StatelessWidget {
+  //memoizer to detect if song Object instance has changed
   AsyncMemoizer _memoizer = AsyncMemoizer();
 
   @override
   Widget build(BuildContext context) {
     final stationsProvider = Provider.of<StationsProvider>(context);
+    final songProvider = Provider.of<SongProvider>(context);
     final player = Provider.of<PlayerProvider>(context);
     final currentStation = stationsProvider.currentStation;
 

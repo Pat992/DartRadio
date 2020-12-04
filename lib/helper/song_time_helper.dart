@@ -19,7 +19,8 @@ class SongTimeHelper {
   }
 
   Duration timeToFinish(){
-    return new DateTime.now().difference(_startdate);
+    Duration diff = new DateTime.now().difference(_startdate);
+    return diff.inMilliseconds<this.duration.inMilliseconds ? diff : duration;
   }
 
   Duration timeLeft(){
