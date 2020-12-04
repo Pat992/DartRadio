@@ -14,7 +14,7 @@ class PlayMain extends StatelessWidget {
     final stationsProvider = Provider.of<StationsProvider>(context);
     final songProvider = Provider.of<SongProvider>(context);
 
-   if(songProvider.checkSongFinished()){
+   if(songProvider.fetchNewSongCheck()){
       songProvider.setSongByUrl(stationsProvider.currentStation.songUrl);
    }
 

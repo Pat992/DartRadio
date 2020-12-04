@@ -11,6 +11,7 @@ class SongProvider with ChangeNotifier {
   SongTimeHelper _songTimeHelper;
   Timer _timer;
 
+  //timer and bool needed to delay fetches of new songs
   Timer _delayFetchTimer;
   bool _delayFetchFlag = true;
 
@@ -41,8 +42,6 @@ class SongProvider with ChangeNotifier {
     });
   }
 
-
-
   get song{
     return _song;
   }
@@ -51,8 +50,6 @@ class SongProvider with ChangeNotifier {
     this._song = value;
     this._songTimeHelper = new SongTimeHelper(value.startedAt, value.endsAt);
   }
-
-
 
   Future<bool> setSongByUrl(String songUrl) async{
     try{
@@ -74,7 +71,8 @@ class SongProvider with ChangeNotifier {
     this._timeToFinishFormatted = this._songTimeHelper.timeToFinishFormatted();
   }
 
-  checkSongFinished(){
+  //checks if the current song is finished and new song can be fetched
+  fetchNewSongCheck(){
     if (this._songTimeHelper.timeLeft().inSeconds <= 0 && this._delayFetchFlag){
       this._delayFetchTimer = this._createDelayFetchTimer();
       this._delayFetchFlag = false;
@@ -83,6 +81,7 @@ class SongProvider with ChangeNotifier {
     return false;
   }
 
+  // timer to delay the fetch of a new song
   _createDelayFetchTimer(){
     return Timer.periodic (Duration(milliseconds: 5000), (Timer t) {
       this._delayFetchFlag = true;
@@ -90,6 +89,7 @@ class SongProvider with ChangeNotifier {
     });
   }
 
+  //cancel all timers
   _cancelTimers(){
     this._timer.cancel();
     if (_delayFetchTimer != null) {
