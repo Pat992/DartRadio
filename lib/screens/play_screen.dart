@@ -6,11 +6,11 @@ import 'package:provider/provider.dart';
 
 class PlayScreen extends StatelessWidget {
   static const ROUTE_NAME = '/play';
-  final Icon _favoriteIcon = Icon(Icons.star);
 
   @override
   Widget build(BuildContext context) {
     var _stationProvider = Provider.of<StationsProvider>(context);
+    var _preferenceProvider = Provider.of<PreferenceProvider>(context);
     return Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
@@ -27,16 +27,13 @@ class PlayScreen extends StatelessWidget {
           actions: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
-              child: IconButton(
-                icon: _favoriteIcon,
-                onPressed: () {
-                  Provider.of<PreferenceProvider>(context, listen: false)
-                      .toggleFavorites(_stationProvider.currentStation.name);
-                  _stationProvider.setUnsetFavorite(
-                      Provider.of<PreferenceProvider>(context, listen: false)
-                          .favorites);
-                },
-              ),
+                child: IconButton(
+                  icon: _stationProvider.getIsFavorite(_preferenceProvider.favorites)? Icon(Icons.star) : Icon(Icons.star_border),
+                  onPressed: (){
+                    Provider.of<PreferenceProvider>(context,listen: false).toggleFavorites(_stationProvider.currentStation.name);
+                    _stationProvider.setUnsetFavorite(Provider.of<PreferenceProvider>(context,listen: false).favorites);
+                    },
+                ),
             ),
           ],
         ),

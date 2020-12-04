@@ -128,16 +128,14 @@ class StationsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  //todo
-  /*setFavIcon(bool _isFavorite){
-    Icon favoriteIcon;
-    if(_isFavorite){
-      favoriteIcon = Icon(Icons.star);
-    }else{
-      favoriteIcon = Icon(Icons.star_border);
-    }
-    return favoriteIcon;
-  }*/
+ bool getIsFavorite (List<dynamic> favorites){
+   for (int x = 0; x < favorites.length; x++) {
+     if (favorites[x] == _currentStation.name){
+       return true;
+     }
+   }
+    return false;
+ }
   void getGenres({String searchText = ""}) {
     if (searchText.trim().isEmpty || searchText == null) {
       _filteredGenres = _genres;
