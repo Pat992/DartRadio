@@ -97,7 +97,11 @@ class StationsProvider with ChangeNotifier {
       if (_stations[i]
           .displayName
           .toLowerCase()
-          .contains(searchText.toLowerCase())) {
+          .contains(searchText.toLowerCase()) ||
+        _stations[i]
+        .description
+        .toLowerCase()
+        .contains(searchText.toLowerCase())) {
         tempList.add(_stations[i]);
       }
     }
