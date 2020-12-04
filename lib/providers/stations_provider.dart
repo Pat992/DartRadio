@@ -26,6 +26,7 @@ class StationsProvider with ChangeNotifier {
     _filteredStations = [];
     _filteredGenres = [];
     _genres = [];
+    _genres.add(Genre('All'));
     _currentStation = new Station();
     _isFavorite = false;
   }
@@ -151,6 +152,28 @@ class StationsProvider with ChangeNotifier {
       }
     }
     _filteredGenres = tempGenreList;
+    notifyListeners();
+  }
+  void getStationsByGenre({String genres = "All"}) {
+    if (genres
+        .trim()
+        .isEmpty || genres == 'All') {
+      _filteredStations = _stations;
+      notifyListeners();
+      return;
+    }
+    List<Station> tempList = [];
+    for (int i = 0; i < _stations.length; i++) {
+      for (int x = 0; x < _stations[i].genres.length; x++) {
+        if (_stations[i]
+            .genres[x]
+            .toLowerCase()
+            .contains(genres.toLowerCase())) {
+          tempList.add(_stations[i]);
+        }
+      }
+    }
+    _filteredStations = tempList;
     notifyListeners();
   }
 

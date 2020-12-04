@@ -5,6 +5,10 @@ class Genre {
     _name = jsonData['name'];
   }
 
+  Genre(String genre){
+    _name = genre;
+  }
+
   get genre {
     return _name;
   }
