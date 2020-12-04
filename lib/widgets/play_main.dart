@@ -1,5 +1,6 @@
 import 'package:dart_radio/models/station.dart';
 import 'package:dart_radio/providers/player_provider.dart';
+import 'package:dart_radio/providers/preference_provider.dart';
 import 'package:dart_radio/providers/song_provider.dart';
 import 'package:dart_radio/providers/stations_provider.dart';
 import 'package:dart_radio/widgets/time_progress.dart';
@@ -15,6 +16,7 @@ class PlayMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final stationsProvider = Provider.of<StationsProvider>(context);
+    final preferenceProvider = Provider.of<PreferenceProvider>(context);
     final songProvider = Provider.of<SongProvider>(context);
     final player = Provider.of<PlayerProvider>(context);
     final currentStation = stationsProvider.currentStation;
@@ -106,6 +108,22 @@ class PlayMain extends StatelessWidget {
                                     },
                                   ),
                           ],
+                        ),
+                        IconButton(
+                          icon: stationsProvider
+                                  .getIsFavorite(preferenceProvider.favorites)
+                              ? Icon(Icons.star)
+                              : Icon(Icons.star_border),
+                          onPressed: () {
+                            Provider.of<PreferenceProvider>(context,
+                                    listen: false)
+                                .toggleFavorites(
+                                    stationsProvider.currentStation.name);
+                            stationsProvider.setUnsetFavorite(
+                                Provider.of<PreferenceProvider>(context,
+                                        listen: false)
+                                    .favorites);
+                          },
                         ),
                         IconButton(
                           icon: Icon(Icons.close),
