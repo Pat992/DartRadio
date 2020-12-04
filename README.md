@@ -11,9 +11,11 @@
 * [Setup](#setup)
 * [laut.fm](#laut.fm)
 
+
 ## General info
 This project contains a Frontend for the laut.fm API.
 It's been used to listen internet radio from multiple devices.
+
 
 ## Technologies
 A list of technologies used within the project:
@@ -21,9 +23,6 @@ A list of technologies used within the project:
 * [Dart](https://dart.dev/): Version 2.10.0
 * [Android Studio](https://developer.android.com/studio): Version 4.1.1
 * [laut.fm API](https://api.laut.fm/)
-
-
-## Setup
 
 
 ### laut.fm
