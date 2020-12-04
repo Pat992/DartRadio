@@ -69,7 +69,7 @@ class SongProvider with ChangeNotifier {
   }
 
   checkSongFinished(){
-    return this._songTimeHelper.timeLeft().inSeconds <= 1;
+    return this._songTimeHelper.timeLeft().inSeconds <= -5;
   }
 
   get timeToFinishFormatted{

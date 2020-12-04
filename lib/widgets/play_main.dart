@@ -15,7 +15,9 @@ class PlayMain extends StatelessWidget {
     final songProvider = Provider.of<SongProvider>(context);
 
    if(songProvider.checkSongFinished()){
-    songProvider.setSongByUrl(stationsProvider.currentStation.songUrl);
+
+      songProvider.setSongByUrl(stationsProvider.currentStation.songUrl);
+
    }
 
     var _height = MediaQuery.of(context).size.height;
