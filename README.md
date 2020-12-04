@@ -2,9 +2,8 @@
 # DartRadio
 
 [<img src="https://github.com/Pat992/DartRadio/blob/main/lib/documentation/design/IconsPNG/favicon.png" width="300" height="300">](https://pat992.github.io/DartRadio/#/)
+
 <sub><sup>_(Click the image to listen DartRadio)_</sup></sub>
-
-
 
 
 ## Table of contents
