@@ -23,12 +23,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  audioplayers: ^0.17.4
-  shared_preferences: ^0.5.12+4
+  shared_preferences: ^2.0.3
   provider: ^4.3.2+2
   http: ^0.12.2
   intl: ^0.16.1
   flutter_animation_progress_bar: ^1.0.6
+  just_audio: ^0.7.0
 
 
   # The following adds the Cupertino Icons font to your application.

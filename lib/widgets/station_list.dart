@@ -46,30 +46,32 @@ class _StationListState extends State<StationList> {
         : Column(
             children: <Widget>[
               Expanded(
-                child: Scrollbar(
-                  isAlwaysShown: true,
-                  showTrackOnHover: true,
+                  child: Scrollbar(
+                isAlwaysShown: true,
+                showTrackOnHover: true,
+                controller: controller,
+                thickness: 10,
+                hoverThickness: 10,
+                child: ListView.builder(
+                  padding: EdgeInsets.only(right: 10),
                   controller: controller,
-                  child: ListView.builder(
-                    controller: controller,
-                    itemCount: stations.length,
-                    itemBuilder: (context, index) => StationListItem(
-                      key: ValueKey(stations[index].name),
-                      title: stations[index].displayName,
-                      description: stations[index].description,
-                      imageUrl: stations[index].image,
-                      streamUrl: stations[index].streamUrl,
-                      startPlaying: (String url) {
-                        stationsProvider.setCurrentStation(stations[index]);
-                        player.play(url);
-                        if (!kIsWeb) {
-                          Navigator.pushNamed(context, '/play');
-                        }
-                      },
-                    ),
+                  itemCount: stations.length,
+                  itemBuilder: (context, index) => StationListItem(
+                    key: ValueKey(stations[index].name),
+                    title: stations[index].displayName,
+                    description: stations[index].description,
+                    imageUrl: stations[index].image,
+                    streamUrl: stations[index].streamUrl,
+                    startPlaying: (String url) {
+                      stationsProvider.setCurrentStation(stations[index]);
+                      player.play(url);
+                      if (!kIsWeb) {
+                        Navigator.pushNamed(context, '/play');
+                      }
+                    },
                   ),
                 ),
-              ),
+              )),
               if (!kIsWeb) MobileFooter(),
               if (kIsWeb) WebFooter(),
             ],

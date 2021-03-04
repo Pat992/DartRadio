@@ -1,5 +1,5 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
+import 'package:just_audio/just_audio.dart';
 
 class PlayerProvider with ChangeNotifier {
   AudioPlayer _player;
@@ -11,7 +11,8 @@ class PlayerProvider with ChangeNotifier {
 
   Future<void> play(String songUrl) async {
     _player.stop();
-    await _player.play(songUrl);
+    await _player.setUrl(songUrl);
+    _player.play();
     _isPlaying = true;
     notifyListeners();
   }
