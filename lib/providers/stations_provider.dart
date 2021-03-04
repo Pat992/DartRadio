@@ -37,7 +37,7 @@ class StationsProvider with ChangeNotifier {
   }
 
   Future<void> getStationsFromApi() async {
-    final String url = '$_baseUrl$_stationUrl';
+    final Uri url = Uri.parse('$_baseUrl$_stationUrl');
 
     try {
       final response = await http.get(url);
@@ -57,7 +57,7 @@ class StationsProvider with ChangeNotifier {
   }
 
   Future<void> getGenresFromApi() async {
-    final String url = '$_baseUrl$_genreUrl';
+    final Uri url = Uri.parse('$_baseUrl$_genreUrl');
 
     try {
       final response = await http.get(url);
@@ -85,9 +85,7 @@ class StationsProvider with ChangeNotifier {
   }
 
   void getStations({String searchText = ""}) {
-    if (searchText
-        .trim()
-        .isEmpty || searchText == null) {
+    if (searchText.trim().isEmpty || searchText == null) {
       _filteredStations = _stations;
       notifyListeners();
       return;
@@ -95,13 +93,13 @@ class StationsProvider with ChangeNotifier {
     List<Station> tempList = [];
     for (int i = 0; i < _stations.length; i++) {
       if (_stations[i]
-          .displayName
-          .toLowerCase()
-          .contains(searchText.toLowerCase()) ||
-        _stations[i]
-        .description
-        .toLowerCase()
-        .contains(searchText.toLowerCase())) {
+              .displayName
+              .toLowerCase()
+              .contains(searchText.toLowerCase()) ||
+          _stations[i]
+              .description
+              .toLowerCase()
+              .contains(searchText.toLowerCase())) {
         tempList.add(_stations[i]);
       }
     }
@@ -109,13 +107,12 @@ class StationsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> toggleFavoriteStations({List<dynamic> favorites}) async{
+  Future<void> toggleFavoriteStations({List<dynamic> favorites}) async {
     _isFavorite = !_isFavorite;
     await setUnsetFavorite(favorites);
   }
 
-  Future<void> setUnsetFavorite(List<dynamic> favorites)
-    async {
+  Future<void> setUnsetFavorite(List<dynamic> favorites) async {
     if (_isFavorite) {
       List<Station> tempList = [];
       for (int i = 0; i < _stations.length; i++) {
@@ -133,14 +130,15 @@ class StationsProvider with ChangeNotifier {
     notifyListeners();
   }
 
- bool getIsFavorite (List<dynamic> favorites){
-   for (int x = 0; x < favorites.length; x++) {
-     if (favorites[x] == _currentStation.name){
-       return true;
-     }
-   }
+  bool getIsFavorite(List<dynamic> favorites) {
+    for (int x = 0; x < favorites.length; x++) {
+      if (favorites[x] == _currentStation.name) {
+        return true;
+      }
+    }
     return false;
- }
+  }
+
   void getGenres({String searchText = ""}) {
     if (searchText.trim().isEmpty || searchText == null) {
       _filteredGenres = _genres;
@@ -149,17 +147,15 @@ class StationsProvider with ChangeNotifier {
     List<Genre> tempGenreList = [];
     for (int i = 0; i < _genres.length; i++) {
       if (_genres[i].genre.toLowerCase().contains(searchText.toLowerCase())) {
-
         tempGenreList.add(_genres[i]);
       }
     }
     _filteredGenres = tempGenreList;
     notifyListeners();
   }
+
   void getStationsByGenre({String genres = "All"}) {
-    if (genres
-        .trim()
-        .isEmpty || genres == 'All') {
+    if (genres.trim().isEmpty || genres == 'All') {
       _filteredStations = _stations;
       notifyListeners();
       return;
@@ -167,10 +163,7 @@ class StationsProvider with ChangeNotifier {
     List<Station> tempList = [];
     for (int i = 0; i < _stations.length; i++) {
       for (int x = 0; x < _stations[i].genres.length; x++) {
-        if (_stations[i]
-            .genres[x]
-            .toLowerCase()
-            == (genres.toLowerCase())) {
+        if (_stations[i].genres[x].toLowerCase() == (genres.toLowerCase())) {
           tempList.add(_stations[i]);
         }
       }
