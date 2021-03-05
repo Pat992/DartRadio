@@ -27,8 +27,7 @@ dependencies:
   provider: ^5.0.0-nullsafety.2
   http: ^0.13.0-nullsafety.2
   intl: ^0.17.0-nullsafety.2
-  flutter_animation_progress_bar: ^1.0.6-nullsafety.2
-  just_audio: ^0.7.0
+  just_audio: ^0.7.0-nullsafety.2
 
 
   # The following adds the Cupertino Icons font to your application.

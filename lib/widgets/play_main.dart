@@ -11,7 +11,7 @@ import 'package:async/async.dart';
 
 class PlayMain extends StatelessWidget {
   //memoizer to detect if song Object instance has changed
-  AsyncMemoizer _memoizer = AsyncMemoizer();
+  final AsyncMemoizer _memoizer = AsyncMemoizer();
 
   @override
   Widget build(BuildContext context) {

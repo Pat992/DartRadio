@@ -1,7 +1,6 @@
 import 'package:dart_radio/providers/song_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:provider/provider.dart';
 
 class TimeProgress extends StatefulWidget {
@@ -9,7 +8,27 @@ class TimeProgress extends StatefulWidget {
   _TimeProgressState createState() => _TimeProgressState();
 }
 
-class _TimeProgressState extends State<TimeProgress> {
+class _TimeProgressState extends State<TimeProgress>
+    with TickerProviderStateMixin {
+  AnimationController _controller;
+
+  @override
+  void initState() {
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    )..addListener(() {
+        setState(() {});
+      });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final songProvider = Provider.of<SongProvider>(context);
@@ -41,12 +60,16 @@ class _TimeProgressState extends State<TimeProgress> {
                   width: 10,
                 ),
                 Expanded(
-                  child: FAProgressBar(
-                      currentValue: songProvider.percentDone,
-                      animatedDuration: const Duration(milliseconds: 300),
-                      progressColor: Theme.of(context).primaryColor,
-                      backgroundColor: Theme.of(context).accentColor,
-                      size: 5),
+                  child: AbsorbPointer(
+                    child: Slider(
+                      value: songProvider.percentDone,
+                      min: 0,
+                      max: 100,
+                      onChanged: (double val) {},
+                      inactiveColor: Theme.of(context).accentColor,
+                      activeColor: Theme.of(context).primaryColor,
+                    ),
+                  ),
                 ),
                 SizedBox(
                   width: 10,
